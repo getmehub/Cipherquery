@@ -1,0 +1,163 @@
+//Creating database
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.dbCreate("vodata").run(conn, function(err, result) {
+  if (err) throw err;
+  console.log(result);
+}); })
+//**************************************************************
+// changing database name
+r.db("old_db_name").config().update({name: "new_db_name"}).run(conn,
+    function(err, result) {
+        if (err) throw err;
+        console.log(result);
+    }
+);
+//*************************************************************
+
+// creating Table *user*
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.db('vodata').tableCreate('user',{primaryKey:"id"}).run(conn, function(err, result) {
+  if (err) throw err;
+  console.log(result);
+}); });
+//inserting attrubutes in table *user*
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.db('vodata').table('user').insert([{password:' ',
+is_superuser:' ',username:' ', first_name:' ',last_name:' ',email:' ',
+is_staff:'',is_active:'',date_joined:r.now(),language_id:'',address:'',country:'' }])
+.run(conn, function(err, result) {
+    if (err) throw err;
+    console.log(result);
+}); });
+
+//*********************************************************
+///adding more of tables *answer*
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.db('vodata').table('answer',{primaryKey:"question_id"}).run(conn, function(err, result) {
+  if (err) throw err;
+  console.log(result);
+}); });
+/////
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.db('vodata').table('answer').insert([{answer:'',distractor:'',language_id:'', }])
+.run(conn, function(err, result) {
+    if (err) throw err;
+    console.log(result); }); });
+
+////*****************************************************
+//creating username table ***creating username table NOTE: made it seperate so that username can have primary ID.
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.db('vodata').tableCreate('username',{primaryKey:"username"}).run(conn, function(err, result) {
+  if (err) throw err;
+  console.log(result);
+}); });
+//*******************************************************
+//creating username table NOTE: made it seperate so that username can have primary ID.
+
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.db('vodata').table('username').insert([{points:'', user_id:'', name:' ', address:' '}])
+.run(conn, function(err, result) {
+    if (err) throw err;
+    console.log(result); }); });
+
+
+    /// continue
+    
+    
+    
+////****
+//creating username table
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.db('vodata').tableCreate('username',{primaryKey:"username"}).run(conn, function(err, result) {
+  if (err) throw err;
+  console.log(result);
+}); 
+});
+//***************************************************
+//creating username table NOTE: made it seperate so that username can have primary ID.
+
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.db('vodata').table('username').insert([{points:'', user_id:'', name:' ', address:' '}])
+.run(conn, function(err, result) {
+    if (err) throw err;
+    console.log(result); });
+   });
+//********************************************************
+// creating table language
+    var r = require("rethinkdb");
+    r.connect(function( err, conn){
+    r.db('vodata').tableCreate('language',{primaryKey:" id"}).run(conn, function(err, result) {
+      if (err) throw err;
+      console.log(result);
+    }); 
+  });
+//////// insertng 
+    var r = require("rethinkdb");
+    r.connect(function( err, conn){
+    r.db('vodata').table('language').insert([{code:'', name:'', is_active:' '}])
+    .run(conn, function(err, result) {
+        if (err) throw err;
+        console.log(result); }); 
+      });
+//********************************************************
+//// creating score table
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.db('vodata').tableCreate('score',{primaryKey:" id"}).run(conn, function(err, result) {
+  if (err) throw err;
+  console.log(result);}); 
+});
+//inserting 
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.db('vodata').table('score').insert([{points:'', fail:'', success:' ', uer_id:" "}])
+.run(conn, function(err, result) {
+    if (err) throw err;
+    console.log(result); });
+   });
+//******************************************************
+//Creating table userlog
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.db('vodata').tableCreate('userlog',{primaryKey:" id"}).run(conn, function(err, result) {
+  if (err) throw err;
+  console.log(result);}); 
+});
+
+//Inserting 
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.db('vodata').table('userlog').insert([{points:'', question_id:'', script_used:' ', created_date:r.now()}])
+.run(conn, function(err, result) {
+    if (err) throw err;
+    console.log(result); }); 
+  });
+//*********************************************************
+//creating table scoreboard
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.db('vodata').tableCreate('scoreboard',{primaryKey:" id"}).run(conn, function(err, result) {
+  if (err) throw err;
+  console.log(result);}); 
+});
+
+//Inserting 
+var r = require("rethinkdb");
+r.connect(function( err, conn){
+r.db('vodata').table('scoreboard').insert([{new_score:'', old_score:''}])
+.run(conn, function(err, result) {
+    if (err) throw err;
+    console.log(result);
+   }); 
+ });
+
+// end
