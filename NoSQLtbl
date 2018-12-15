@@ -1,0 +1,15 @@
+var r = require("rethinkdb");
+var async = require("async");
+r.dbCreateDb= function(next){
+r.connect(function( err, conn){
+r.dbCreate("vodata").run (conn,function(err,res){
+  conn.close(); next(err,res);
+  var CreateTable = function(User,next){
+    r.connect({db:"vodata", function (err,conn){
+      r.tableCreate("Answer",{primaryKey:"question_id"}).insert([{answer:" ", distractor:" ", language_id:" ", id:" "}]);
+      console.log(res)}
+    });
+  };
+});
+});
+};
